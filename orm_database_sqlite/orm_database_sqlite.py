@@ -43,7 +43,6 @@ class Sqlite:
         query_key = self.ObjectQueryBuilder.Query_key(value)
         query_value = self.ObjectQueryBuilder.Query_insert_value(value)
         query = f"{query_table} {query_key} {query_value}"
-        print(query)
         if isinstance(value,dict):
             data = ()
 
@@ -69,16 +68,22 @@ class Sqlite:
 
 
 
-    async def select(self,table:str,filed:list =[],filter:dict={}, order:dict={},limit:int=None):
-        
+    async def select(self,table:str,
+                     filed:list =[],
+                     filter:dict={},
+                      order:dict={},
+                     limit:int=None,
+                     like:bool=False,
+                     filter_and:bool=True):
+
+
         query_feild = self.ObjectQueryBuilder.Query_feild(filed)
         query_table = self.ObjectQueryBuilder.Query_table(table)
-        query_filter = self.ObjectQueryBuilder.Query_filter(filter)
+        query_filter = self.ObjectQueryBuilder.Query_filter(filter,like,filter_and)
         query_order = self.ObjectQueryBuilder.Query_order(order)
         query_limit = self.ObjectQueryBuilder.Query_limit(limit)
         
         query = f"{query_feild} {query_table} {query_filter} {query_order} {query_limit}"
-
         cur = self.db.cursor()
         cur.execute(query)
         result = cur.fetchall()
@@ -99,7 +104,7 @@ class Sqlite:
     async def update(self,table:str,filter:dict,value:dict):
         query_table = self.ObjectQueryBuilder.Query_table_update(table)
         query_value = self.ObjectQueryBuilder.Query_value(value)
-        query_filter = self.ObjectQueryBuilder.Query_filter(filter)
+        query_filter = self.ObjectQueryBuilder.Query_filter(filter,False,False)
         query = f"{query_table} {query_value} {query_filter} "
         cur = self.db.cursor()
         cur.execute(query)

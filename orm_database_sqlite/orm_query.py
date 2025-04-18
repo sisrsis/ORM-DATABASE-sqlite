@@ -111,13 +111,22 @@ class QueryBuilder:
         return f"FROM {table}"
     
 
-    def Query_filter(self,filter:dict):
+    def Query_filter(self,filter:dict,like:bool=None,filter_and:bool=None):
         if filter == {}:
             return " "
         else:
             query = "WHERE "
             for key in filter.keys():
-                query = query + f'{key}="{filter[key]}" AND '
+                if like == True:
+                    if filter_and == True:
+                        query = query + f"{key} LIKE '%{filter[key]}%' AND "
+                    elif filter_and == False:
+                        query = query + f"{key} LIKE '%{filter[key]}%' OR "
+                elif like == False:
+                    if filter_and == True:
+                        query = query + f'{key}="{filter[key]}" AND '
+                    elif filter_and == False:
+                        query = query + f'{key}="{filter[key]}" OR '
             query = query[:-4]
             return query
 
