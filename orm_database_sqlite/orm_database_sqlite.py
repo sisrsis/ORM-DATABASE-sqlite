@@ -87,9 +87,9 @@ class Sqlite:
         return result
 
     
-    async def delete(self,table:str,filter):
+    async def delete(self,table:str,filter,like:bool=False,filter_and:bool=True):
         query_table = self.ObjectQueryBuilder.Query_delete(table)
-        query_filter = self.ObjectQueryBuilder.Query_filter(filter)
+        query_filter = self.ObjectQueryBuilder.Query_filter(filter,like=like,filter_and=filter_and)
         query = f"{query_table} {query_filter}"
         cur = self.db.cursor()
         cur.execute(query)
