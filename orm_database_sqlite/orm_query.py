@@ -115,7 +115,7 @@ class QueryBuilder:
         if filter == {}:
             return " "
         else:
-            query = "WHERE "
+            query = " WHERE "
             for key in filter.keys():
                 if like == True:
                     if filter_and == True:

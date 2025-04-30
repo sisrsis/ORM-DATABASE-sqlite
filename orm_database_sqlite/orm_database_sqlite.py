@@ -15,7 +15,7 @@ class Sqlite:
             self.db = sqlite3.connect(self.fileName)
 
         except:
-            print("Error connecting maraidb")
+            print("Error connecting sqlite")
             sys.exit(1)
 
 
