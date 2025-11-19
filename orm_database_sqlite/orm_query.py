@@ -97,7 +97,7 @@ class QueryBuilder:
 
     def Query_feild(self,feild:list=[]):
         if feild == []:
-            query = f"SELECT * FROM "
+            query = f"SELECT *  "
             return query
         else:
             query = f"SELECT "
