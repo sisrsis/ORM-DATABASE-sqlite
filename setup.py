@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
    name='orm_database_sqlite',
-   version='0.0.4',
+   version='0.0.5',
    description='This module is written to launch your programs with any database you want in the shortest time ',
    license="MIT",
    author='SISRSIS',
