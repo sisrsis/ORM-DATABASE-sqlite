@@ -30,7 +30,7 @@ class QueryBuilder:
                 query = query + a + " " + type + ","
             else :
                 try:
-                    type = data["default"]
+                    type = data["type"] + " " + data["default"]
                     query = query + a + " " + type + "," 
                 except:    
                     match data["type"]:
